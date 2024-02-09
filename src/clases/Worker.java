@@ -1,34 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Clases;
 
-import static java.lang.Thread.sleep;
+package clases;
+
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author simon
- */
 public class Worker extends Thread {
     public String rol;
     private float prodByDay;
     private float counter;
     public int wage;
     private long savings;
-    protected long dia;
-    public Company empresa;
+    private long dia;
+    public Empresa empresa;
 
-    public Worker(int wage, String rol, float production, long duracion, Company empresa){
+    public Worker(int wage, String rol, float production, long duracion, Empresa empresa){
         
         this.rol = rol;
         this.counter = 0;
         this.prodByDay = production;
         this.savings = 0;
-        this.dia = 1000;
+        this.dia = duracion;
         this.wage = wage;
         this.empresa = empresa;
     }
@@ -40,7 +32,7 @@ public class Worker extends Thread {
             try{
                 sleep(this.dia);
                 this.savings += this.wage;
-                produce();
+                producir();
             }
             catch(InterruptedException ex){
                 Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,7 +40,7 @@ public class Worker extends Thread {
         }
     }
     
-    public void produce(){
+    public void producir(){
         
         this.counter += this.prodByDay;
         
